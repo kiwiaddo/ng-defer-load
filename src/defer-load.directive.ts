@@ -1,5 +1,5 @@
-import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Inject, Input, NgZone, OnDestroy, Output, PLATFORM_ID, OnInit } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Inject, Input, NgZone, OnDestroy, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -21,7 +21,7 @@ export class DeferLoadDirective implements OnInit, AfterViewInit, OnDestroy {
     ) { }
 
     public ngOnInit () {
-        if (isPlatformBrowser(this.platformId) && this.preRender === true) {
+        if (isPlatformServer(this.platformId) && this.preRender === true) {
             this.load();
         }
     }
